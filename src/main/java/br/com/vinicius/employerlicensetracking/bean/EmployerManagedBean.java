@@ -98,6 +98,14 @@ public class EmployerManagedBean {
 		employeeSquadRepository.deleteAllByFuncionarioId(employee.getId());
 	}
 	
+	public void selectAllServices() {
+		if(servicesSelected.size() == services.size()) {
+			servicesSelected = new ArrayList<ServiceEntity>();
+		}else {
+			servicesSelected = services;
+		}
+	}
+	
 	public List<EmployeeEntity> completeEmployee(String query) {
 		String queryLowerCase = query.toLowerCase();
 		queryLowerCase = queryLowerCase.concat("%");

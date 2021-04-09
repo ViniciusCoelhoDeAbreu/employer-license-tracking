@@ -38,6 +38,10 @@
 		<h:panelGrid columns="6">
 			<p:column>
 				<h1>Serviços Ativos</h1>
+				<p:commandLink value="Selecionar Todos"
+					action="#{employerManagedBean.selectAllServices}" update="frmInfo" />
+				<br />
+
 				<p:selectManyCheckbox
 					value="#{employerManagedBean.servicesSelected}"
 					converter="#{serviceConverter}" layout="pageDirection" columns="1"
