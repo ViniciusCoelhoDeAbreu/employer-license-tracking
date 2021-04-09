@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+		"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<h:head>
+</h:head>
+
+<f:view>
+	<h:form id="frmInfo" style="margin-left:50px; margin-top: 75px;">
+
+		<p:autoComplete converter="#{employerConverter}" size="65"
+			placeholder="Pesquisar Funcionário"
+			completeMethod="#{employerManagedBean.completeEmployee}"
+			var="employee" itemLabel="#{employee.nome}" itemValue="#{employee}">
+
+			<p:ajax event="itemSelect"
+				listener="#{employerManagedBean.onItemSelect}" update="frmInfo" />
+
+		</p:autoComplete>
+
+		<br />
+		<br />
+		<br />
+
+		<p:messages id="messages" showDetail="true" closable="true">
+			<p:autoUpdate />
+		</p:messages>
+
+		<p:inputText id="inputFuncionario" placeholder="Nome Funcionário"
+			size="45" value="#{employerManagedBean.employee.nome}" />
+
+
+		<h:panelGrid columns="6">
+			<p:column>
+				<h1>Serviços Ativos</h1>
+				<p:selectManyCheckbox
+					value="#{employerManagedBean.servicesSelected}"
+					converter="#{serviceConverter}" layout="pageDirection" columns="1"
+					styleClass="grid-checkbox">
+
+
+					<f:selectItems value="#{employerManagedBean.services}"
+						var="service" itemLabel="#{service.nome}" itemValue="#{service}" />
+				</p:selectManyCheckbox>
+			</p:column>
+			<p:spacer width="30px" />
+			<p:column>
+				<h1>Squad</h1>
+				<p:selectManyCheckbox value="#{employerManagedBean.squadsSelected}"
+					converter="#{squadConverter}" layout="pageDirection" columns="1"
+					styleClass="grid-checkbox">
+					<f:selectItems value="#{employerManagedBean.squads}" var="squad"
+						itemLabel="#{squad.nome}" itemValue="#{squad}" />
+				</p:selectManyCheckbox>
+			</p:column>
+
+			<p:spacer width="30px" />
+			<p:column>
+				<h1>Funcionário</h1>
+				<p:selectManyCheckbox
+					value="#{employerManagedBean.companiesSelected}"
+					converter="#{companyConverter}" layout="pageDirection" columns="1"
+					styleClass="grid-checkbox">
+					<f:selectItems value="#{employerManagedBean.companies}"
+						var="company" itemLabel="#{company.nome}" itemValue="#{company}" />
+				</p:selectManyCheckbox>
+			</p:column>
+		</h:panelGrid>
+
+		<br />
+
+
+		<div style="position: relative; left: 200px">
+			<h:panelGrid columns="6">
+				<p:commandButton icon="pi pi-user"
+					styleClass="rounded-button ui-button-info" update="frmInfo"
+					action="#{employerManagedBean.initialize}" />
+				<br />
+				<p:commandButton icon="pi pi-check" styleClass="rounded-button"
+					update="frmInfo" action="#{employerManagedBean.save}" />
+				<br />
+				<p:commandButton icon="pi pi-times"
+					rendered="#{employerManagedBean.employee.id != null}"
+					styleClass="rounded-button ui-button-danger"
+					onclick="PF('dlg').show();" />
+			</h:panelGrid>
+		</div>
+
+
+		<p:dialog header="Deseja realmente deletar este Funcionário?"
+			draggable="false" widgetVar="dlg" modal="true">
+			<div align="center">
+				<h:panelGrid columns="3">
+					<p:commandButton icon="pi pi-check"
+						styleClass="rounded-button ui-button-success" update="frmInfo"
+						onclick="PF('dlg').hide();" action="#{employerManagedBean.delete}" />
+					<br />
+					<p:commandButton icon="pi pi-times"
+						styleClass="rounded-button ui-button-danger" update="frmInfo"
+						onclick="PF('dlg').hide();" />
+				</h:panelGrid>
+			</div>
+		</p:dialog>
+
+
+
+	</h:form>
+</f:view>
+
+
+
+</html>
