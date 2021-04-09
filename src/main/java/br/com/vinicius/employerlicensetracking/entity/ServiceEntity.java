@@ -2,6 +2,7 @@ package br.com.vinicius.employerlicensetracking.entity;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -40,6 +41,9 @@ public class ServiceEntity implements Serializable{
 	private Integer id;
 	
 	private @NonNull String nome;
+	
+	@Column(name = "qtde_licencas_previstas", columnDefinition = "INTEGER default 0")
+	private Integer qtdeLicencasPrevistas;
 
 	
 }
