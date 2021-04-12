@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+		"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<h:head>
+</h:head>
+
+<f:view>
+	<h:form id="frmInfo" style="margin-left:50px; margin-top: 75px;">
+
+		<a style="color: #2196F3;" href="/index.jsf">Ir para Index</a>
+		<a style="color: #2196F3;" href="/squad.jsf">Ir para Squads</a>
+		<a style="color: #2196F3;" href="/company.jsf">Ir para Empresas</a>
+		<br />
+		<br />
+
+
+		<p:autoComplete converter="#{serviceConverter}" size="65"
+			dropdown="true" placeholder="Pesquisar Serviço"
+			completeMethod="#{serviceManagedBean.completeService}" var="service"
+			itemLabel="#{service.nome}" itemValue="#{service}">
+
+			<p:ajax event="itemSelect"
+				listener="#{serviceManagedBean.onItemSelect}" update="frmInfo" />
+
+		</p:autoComplete>
+
+		<br />
+		<br />
+		<br />
+
+		<p:messages id="messages" showDetail="true" closable="true">
+			<p:autoUpdate />
+		</p:messages>
+
+		<h:panelGrid columns="2">
+
+			<p:inputText id="inputServico" placeholder="Nome Serviço" size="45"
+				value="#{serviceManagedBean.service.nome}" />
+
+			<p:inputText
+				value="#{serviceManagedBean.service.qtdeLicencasPrevistas}"
+				placeholder="Qtde. Licenças Previstas">
+				<p:keyFilter mask="num" />
+			</p:inputText>
+
+		</h:panelGrid>
+
+		<br />
+
+		<div style="position: relative; left: 200px">
+			<p:commandButton icon="pi pi-check" styleClass="rounded-button"
+				update="frmInfo" action="#{serviceManagedBean.save}" />
+		</div>
+
+	</h:form>
+</f:view>
+
+
+
+</html>

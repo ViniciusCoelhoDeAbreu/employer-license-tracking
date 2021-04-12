@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+		"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<h:head>
+</h:head>
+
+<f:view>
+	<h:form id="frmInfo" style="margin-left:50px; margin-top: 75px;">
+
+		<a style="color: #2196F3;" href="/index.jsf">Ir para Index</a>
+		<a style="color: #2196F3;" href="/service.jsf">Ir para Serviços</a>
+		<a style="color: #2196F3;" href="/company.jsf">Ir para Empresas</a>
+		<br />
+		<br />
+
+
+		<p:autoComplete converter="#{squadConverter}" size="65"
+			dropdown="true" placeholder="Pesquisar Squad"
+			completeMethod="#{squadManagedBean.completeSquad}" var="squad"
+			itemLabel="#{squad.nome}" itemValue="#{squad}">
+
+			<p:ajax event="itemSelect"
+				listener="#{squadManagedBean.onItemSelect}" update="frmInfo" />
+
+		</p:autoComplete>
+
+		<br />
+		<br />
+		<br />
+
+		<p:messages id="messages" showDetail="true" closable="true">
+			<p:autoUpdate />
+		</p:messages>
+
+
+		<p:inputText id="inputSquad" placeholder="Nome Squad" size="45"
+			value="#{squadManagedBean.squad.nome}" />
+
+
+		<br />
+		<br />
+
+		<div style="position: relative; left: 200px">
+			<p:commandButton icon="pi pi-check" styleClass="rounded-button"
+				update="frmInfo" action="#{squadManagedBean.save}" />
+		</div>
+
+	</h:form>
+</f:view>
+
+
+
+</html>

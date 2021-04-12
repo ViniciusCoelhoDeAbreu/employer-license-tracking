@@ -36,7 +36,7 @@ public class CompanyEntity implements Serializable{
 	                @Parameter(name = "increment_size", value = "1")
 	        }
 	)
-	@GeneratedValue(generator = "serviceSequenceGenerator")
+	@GeneratedValue(generator = "companySequenceGenerator")
 	private Integer id;
 	
 	private @NonNull String nome;

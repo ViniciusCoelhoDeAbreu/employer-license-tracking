@@ -30,7 +30,7 @@ import lombok.Data;
 import lombok.NonNull;
 
 @Component
-@Scope("session")
+@Scope("view")
 @Data
 public class EmployerManagedBean {
 	
